@@ -56,8 +56,8 @@ Such as: Speech recognition, Visual perception, Language translation...
 ## AI Subfields
 
 <div style="display: flex; justify-content: space-between; align-items: center;">
-  <img src="image.png" alt="alt text" style="width: 49%;" />
-  <img src="image-1.png" alt="alt text" style="width: 49%;" />
+  <img src="/image.png" alt="alt text" style="width: 49%;" />
+  <img src="/image-1.png" alt="alt text" style="width: 49%;" />
 </div>
 
 ---
