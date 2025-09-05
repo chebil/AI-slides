@@ -1,0 +1,17 @@
+{
+  "name": "introduction-to-ai-slides",
+  "version": "1.0.0",
+  "description": "Introduction to Artificial Intelligence course slides",
+  "scripts": {
+    "dev": "slidev slides.md",
+    "build": "slidev build slides.md",
+    "export": "slidev export slides.md"
+  },
+  "dependencies": {
+    "@slidev/cli": "^0.47.0",
+    "@slidev/theme-default": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  }
+}
