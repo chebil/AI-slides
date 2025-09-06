@@ -1,6 +1,9 @@
 ---
+layout: intro
+---
 
 # Chapter 1: Introduction to Artificial Intelligence
+---
 
   ## What is intelligence?
 
