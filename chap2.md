@@ -328,8 +328,10 @@ layout: two-cols
 
 **[8-Queens Problem]{style="color:red"}**:   
     - Place 8 queens on a chessboard such that no two queens threaten each other.  
+<div align="center">
 
 ![8-Queens Problem](https://media.geeksforgeeks.org/wp-content/uploads/20200725103943/ApronusDiagram1595653398-300x300.png)
+</div>
 Modeling the 8-Queens problem as a CSP:
 
 ::right::
@@ -341,5 +343,29 @@ Modeling the 8-Queens problem as a CSP:
   - Column constraints: No two queens can be in the same column.
     $$\forall i, j \in \{1, \ldots, 8\}, i \neq j: Q_i \neq Q_j $$
   - Diagonal constraints: No two queens can be on the same diagonal.
-    $$\forall i, j \in \{1, \ldots, 8\}, i \neq j: |Q_i - Q_j| \neq |i - j| $$
+    $$|Q_i - Q_j| \neq |i - j|, \forall i, j \in \{1, \ldots, 8\}, i \neq j $$
 ---
+Solving the 8-Queens problem as CSP using python-constraint library:
+
+```python{*|1-4|5-12|13-20}{maxHeight:'400px'}
+from constraint import Problem, AllDifferentConstraint
+
+def solve_8_queens():
+    problem = Problem()
+    # Define variables and their domains
+    problem.addVariables(range(1, 9), range(1, 9))
+    # Column constraints
+    problem.addConstraint(AllDifferentConstraint(), range(1, 9))  
+    # Diagonal constraints
+    for i in range(1, 9):
+        for j in range(i + 1, 9):
+            problem.addConstraint(lambda i=i, j=j: abs(i - j) != abs(problem.getSolution()[i] - problem.getSolution()[j]), (i, j)) 
+    # Get solutions
+    solutions = problem.getSolutions()
+    return solutions
+# Solve the problem
+solutions = solve_8_queens()
+print(f"Number of solutions found: {len(solutions)}")
+for solution in solutions:
+    print(solution)
+```
