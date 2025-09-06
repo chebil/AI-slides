@@ -252,7 +252,4 @@ Given the following Sudoku puzzle, fill in the missing numbers to satisfy the co
 
 How to represent the Sudoku problem as a CSP:
 
-- **Variables**: Each cell in the 9x9 grid can be represented as a variable, e.g.,
-$x_{ij}$ where $i$ is the row index and $j$ is the column index. 
 
-- **Domains**: The domain of each variable $x_{ij}$ is the set of possible values {1, 2, 3, 4, 5, 6, 7, 8, 9}. If a cell is already filled in the puzzle, its domain is restricted to that single value.
