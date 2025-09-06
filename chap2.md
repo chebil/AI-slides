@@ -120,8 +120,8 @@ graph TD
 
 There are certain types of problems that repeatedly reappear in deductive forms of artificial intelligence. These are important representatives of “typical” problems, and their solutions can often be generalized to other similar problems. Therefore, studying these problems can provide insights into solving more general problems in the deductive setting.
 
-1. [Constraint Satisfaction Problems (CSPs)]{style="color:red"}:
-    - A set of variables, each with a domain of possible values.
+**[1. Constraint Satisfaction Problems (CSPs)]{style="color:red"}**:   
+    - A set of variables, each with a domain of possible values.  
     - A set of constraints that specify allowable combinations of values for subsets of variables.
 
 **Example: Sudoku**
@@ -130,7 +130,7 @@ There are certain types of problems that repeatedly reappear in deductive forms 
   - Constraints: No repeated numbers in any row, column, or 3x3 subgrid.
 ---
 
-1. [Constraint Satisfaction Problems (CSPs) (Continued)]{style="color:red"}:
+**[Sudoku as a CSP (Continued)]{style="color:red"}**
 
 Given the following Sudoku puzzle, fill in the missing numbers to satisfy the constraints.
 
@@ -248,8 +248,98 @@ Given the following Sudoku puzzle, fill in the missing numbers to satisfy the co
 </table>
 ---
 
-1. [Constraint Satisfaction Problems (CSPs) (Continued)]{style="color:red"}:
+**[Sudoku as a CSP (Continued)]{style="color:red"}**
 
 How to represent the Sudoku problem as a CSP:
+- **Variables**: Each cell in the 9x9 grid (e.g., $(X_{1,1}, X_{1,2}, \ldots, X_{9,9})$ ).
+- **Domains**: The possible values for each variable (1-9).
+- **Constraints**:
+  - Row constraints: All numbers in a row must be different.
+  $$\forall i \in \{1, \ldots, 9\}, \forall j, k \in \{1, \ldots, 9\}, j \neq k: X_{i,j} \neq X_{i,k} $$
+  - Column constraints: All numbers in a column must be different.
+  $$\forall j \in \{1, \ldots, 9\}, \forall i, k \in \{1, \ldots, 9\}, i \neq k: X_{i,j} \neq X_{k,j} $$
+  - Subgrid constraints: All numbers in each 3x3 subgrid must be different.
+    $$\forall m, n \in \{0, 1, 2\}, \forall i, j, k, l \in \{1, 2, 3\}, (i,j) \neq (k,l): X_{3m+i, 3n+j} \neq X_{3m+k, 3n+l} $$
 
+---
 
+Solving Sudoku as CSP using python-constraint library:
+
+```python{*|1|1-4|5-11|13-20|22-26|28-33|34-54}{maxHeight:'400px'}
+from constraint import Problem, AllDifferentConstraint
+def solve_sudoku(puzzle):
+    problem = Problem()
+    
+    # Define variables and their domains
+    for row in range(9):
+        for col in range(9):
+            if puzzle[row][col] == 0:
+                problem.addVariable((row, col), range(1, 10))
+            else:
+                problem.addVariable((row, col), [puzzle[row][col]])
+    
+    # Add row constraints
+    for row in range(9):
+        problem.addConstraint(AllDifferentConstraint(), [(row, col) for col in range(9)])
+    
+    # Add column constraints
+    for col in range(9):
+        problem.addConstraint(AllDifferentConstraint(), [(row, col) for row in range(9)])
+    
+    # Add subgrid constraints
+    for box_row in range(3):
+        for box_col in range(3):
+            problem.addConstraint(AllDifferentConstraint(), 
+                                  [(box_row * 3 + i, box_col * 3 + j) for i in range(3) for j in range(3)])
+    
+    # Get solutions
+    solutions = problem.getSolutions()
+    
+    if solutions:
+        return solutions[0]  # Return the first solution found
+    else:
+        return None
+# Example Sudoku puzzle (0 represents empty cells)
+puzzle = [
+    [5, 3, 0, 0, 7, 0, 0, 0, 0],
+    [6, 0, 0, 1, 9, 5, 0, 0, 0],
+    [0, 9, 8, 0, 0, 0, 0, 6, 0],
+    [8, 0, 0, 0, 6, 0, 0, 0, 3],
+    [4, 0, 0, 8, 0, 3, 0, 0, 1],
+    [7, 0, 0, 0, 2, 0, 0, 0, 6],
+    [0, 6, 0, 0, 0, 0, 2, 8, 0],
+    [0, 0, 0, 4, 1, 9, 0, 0, 5],
+    [0, 0, 0, 0, 8, 0, 0, 7, 9]
+]
+
+# Solve the puzzle
+solution = solve_sudoku(puzzle)
+if solution:
+    print("Sudoku solved successfully:")
+    for row in range(9):
+        print([solution[(row, col)] for col in range(9)])
+else:
+    print("No solution exists.")    
+```
+
+---
+layout: two-cols
+---
+
+**[8-Queens Problem]{style="color:red"}**:   
+    - Place 8 queens on a chessboard such that no two queens threaten each other.  
+
+![8-Queens Problem](https://media.geeksforgeeks.org/wp-content/uploads/20200725103943/ApronusDiagram1595653398-300x300.png)
+Modeling the 8-Queens problem as a CSP:
+
+::right::
+
+- **Variables**: $Q_1, Q_2, \ldots, Q_8$ (each representing the column position of a queen in each row).
+- **Domains**: $\{1, 2, \ldots, 8\}$ for each variable.
+- **Constraints**:
+  - Row constraints: Each queen must be in a different row (inherent in the variable definition).
+  - Column constraints: No two queens can be in the same column.
+    $$\forall i, j \in \{1, \ldots, 8\}, i \neq j: Q_i \neq Q_j $$
+  - Diagonal constraints: No two queens can be on the same diagonal.
+    $$\forall i, j \in \{1, \ldots, 8\}, i \neq j: |Q_i - Q_j| \neq |i - j| $$
+---
