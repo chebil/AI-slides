@@ -116,7 +116,7 @@ graph TD
 </div>
 ---
 
-## Deductive reasoning examples
+## Deductive reasoning in Artificial Intelligence
 
 There are certain types of problems that repeatedly reappear in deductive forms of artificial intelligence. These are important representatives of “typical” problems, and their solutions can often be generalized to other similar problems. Therefore, studying these problems can provide insights into solving more general problems in the deductive setting.
 
@@ -270,7 +270,7 @@ from constraint import Problem, AllDifferentConstraint
 def solve_sudoku(puzzle):
     problem = Problem()
     
-    # Define variables and their domains
+    #Define variables and their domains
     for row in range(9):
         for col in range(9):
             if puzzle[row][col] == 0:
@@ -278,28 +278,28 @@ def solve_sudoku(puzzle):
             else:
                 problem.addVariable((row, col), [puzzle[row][col]])
     
-    # Add row constraints
+    #Add row constraints
     for row in range(9):
         problem.addConstraint(AllDifferentConstraint(), [(row, col) for col in range(9)])
     
-    # Add column constraints
+    #Add column constraints
     for col in range(9):
         problem.addConstraint(AllDifferentConstraint(), [(row, col) for row in range(9)])
     
-    # Add subgrid constraints
+    #Add subgrid constraints
     for box_row in range(3):
         for box_col in range(3):
             problem.addConstraint(AllDifferentConstraint(), 
                                   [(box_row * 3 + i, box_col * 3 + j) for i in range(3) for j in range(3)])
     
-    # Get solutions
+    #Get solutions
     solutions = problem.getSolutions()
     
     if solutions:
         return solutions[0]  # Return the first solution found
     else:
         return None
-# Example Sudoku puzzle (0 represents empty cells)
+    #Example Sudoku puzzle (0 represents empty cells)
 puzzle = [
     [5, 3, 0, 0, 7, 0, 0, 0, 0],
     [6, 0, 0, 1, 9, 5, 0, 0, 0],
@@ -312,7 +312,7 @@ puzzle = [
     [0, 0, 0, 0, 8, 0, 0, 7, 9]
 ]
 
-# Solve the puzzle
+#Solve the puzzle
 solution = solve_sudoku(puzzle)
 if solution:
     print("Sudoku solved successfully:")
@@ -345,6 +345,7 @@ Modeling the 8-Queens problem as a CSP:
   - Diagonal constraints: No two queens can be on the same diagonal.
     $$|Q_i - Q_j| \neq |i - j|, \forall i, j \in \{1, \ldots, 8\}, i \neq j $$
 ---
+
 Solving the 8-Queens problem as CSP using python-constraint library:
 
 ```python{*|1-4|5-12|13-20}{maxHeight:'400px'}
@@ -352,20 +353,138 @@ from constraint import Problem, AllDifferentConstraint
 
 def solve_8_queens():
     problem = Problem()
-    # Define variables and their domains
+    #Define variables and their domains
     problem.addVariables(range(1, 9), range(1, 9))
-    # Column constraints
+    #Column constraints
     problem.addConstraint(AllDifferentConstraint(), range(1, 9))  
-    # Diagonal constraints
+    #Diagonal constraints
     for i in range(1, 9):
         for j in range(i + 1, 9):
             problem.addConstraint(lambda i=i, j=j: abs(i - j) != abs(problem.getSolution()[i] - problem.getSolution()[j]), (i, j)) 
-    # Get solutions
+    #Get solutions
     solutions = problem.getSolutions()
     return solutions
-# Solve the problem
+#Solve the problem
 solutions = solve_8_queens()
 print(f"Number of solutions found: {len(solutions)}")
 for solution in solutions:
     print(solution)
 ```
+---
+
+**[2. Solving NP-Hard Problems]{style="color:red"}**:  
+
+- Many problems in artificial intelligence suffer from the combinatorial explosion in the number of possible solutions as the problem size increases. For example, in the case of the eight queens problem, one has to choose eight positions out of 64 positions. The number of possible solutions is given by 
+$$C(64, 8) = \frac{64!}{8!(64-8)!} = 4,426,165,368$$ 
+- Generalizing the eight queens problem to the n-queens problem leads to an NP-hard setting.
+- The Traveling Salesman Problem (TSP) is another classic NP-hard problem where the goal is to find the shortest possible route that visits a set of cities and returns to the origin city. An instance of TSP with n cities has $(n-1)!$ possible routes, which grows factorially with n.
+- Many other problems in AI, such as scheduling, vehicle routing, and resource allocation, are also NP-hard.
+
+---
+
+**[3. Expert systems]{style="color:red"}**:  
+
+- Expert systems are AI programs that mimic the decision-making abilities of a human expert. They use a knowledge base of human expertise and an inference engine to solve specific problems within a certain domain.
+- Components of expert systems:
+  - **Knowledge Base**: Contains domain-specific knowledge, including facts and rules.
+  - **Inference Engine**: Applies logical rules to the knowledge base to deduce new information or make decisions.
+  - **User Interface**: Allows users to interact with the expert system, input data, and receive advice or solutions.
+- Applications of expert systems:
+  - Medical diagnosis (e.g., MYCIN)
+  - Financial forecasting
+  - Troubleshooting and repair (e.g., XCON)
+---
+
+**[3. Expert systems (continued)]{style="color:red"}**:  
+ For example, consider a patient, John, who comes to a doctor, while presenting the following facts about their situation:  
+- John is running a temperature
+- John is coughing
+- John has colored phlegm
+
+Now imagine a case where the expert system contains the following subset of rules:  
+- IF coughing AND temperature THEN infection
+- IF colored phlegm AND infection THEN bacterial infection
+- IF bacterial infection THEN administer antibiotic  
+
+A doctor can then enter John's symptoms in the expert system and then use a chain of inferences in order to conclude that an antibiotic needs to be administered to John.   
+  
+[In practice, one would have to enter a very large number of rules and cases in order to make the system work well.]{style="color:Blue"} 
+---
+
+###  Classical Methods for Deductive Reasoning
+There are several classical methods for deductive reasoning in artificial intelligence, including:
+- **Search Algorithms**: Techniques like depth-first search, breadth-first search, and A* search are used to explore possible states and find solutions to problems. Indeed, many problems in AI can be represented as graphs, where nodes represent states and edges represent actions or transitions between states. Search algorithms are used to traverse these graphs to find a path from an initial state to a goal state.  
+
+- **Logic-Based Methods**: These involve using formal logic to represent knowledge and make inferences. Examples include propositional logic, first-order logic, and resolution.
+- **Constraint Satisfaction Problems (CSPs)**: As discussed earlier, CSPs involve finding values for variables that satisfy a set of constraints. Techniques like backtracking, constraint propagation, and local search are commonly used to solve CSPs.
+
+---
+
+### Strengths and Limitations of Deductive Reasoning  
+
+<div align="center">
+
+<div style="background: #ffebee; color: #b71c1c; border: 2px solid #b71c1c; border-radius: 8px; padding: 1rem; max-width: 500px; margin: 1rem auto; font-weight: bold; font-size: 1.1em;">
+&#9888; <span style="font-size:1.1em;">The greatest strengths of deductive reasoning are also its greatest limitations</span>
+</div>
+<div style="background: #e8f5e9; color: #1b5e20; border: 2px solid #1b5e20; border-radius: 8px; padding: 1rem; max-width: 800px; margin: 1rem auto; font-weight: bold; font-size: 1.1em;">
+&#9989; <span style="font-size:1.1em;">
+Deductive reasoning requires a way to code up expert knowledge in a knowledge base. Coding up such knowledge requires a human to understand and interpret this knowledge. 
+This results in highly interpretable systems, which are obviously desirable. However, this interpretability is also an Achilles heel in the goal towards human-like behavior, because many human decisions rely on a high level of understanding that is not easily interpretable.
+</span>
+</div>
+</div>
+---
+
+##  Inductive Learning in Artificial Intelligence
+
+- While deductive reasoning systems try to encode domain knowledge within a knowledge base to make hypotheses.
+Inductive learning systems try to use data in order to create their own data-dependent hypotheses.  
+
+<div style="background: #e8f5e9; color: #1b5e20; border: 2px solid #1b5e20; border-radius: 8px; padding: 1rem; max-width: 800px; margin: 1rem auto; font-weight: bold; font-size: 1.1em;">
+&#9989; <span style="font-size:1.1em;">
+In inductive learning a mathematical model is used to define a hypothesis, the resulting model is used for prediction on examples that have not been seen before
+</span>
+</div>
+
+- The general idea of using examples in order to learn models for prediction is also referred to as **machine learning**.
+
+---
+
+### Types of Data in Inductive Learning
+
+<div align="center">
+
+```mermaid
+graph TD
+    A[Data Types] --> B[Multidimensional Data ]
+    B ---> G[ data point is represented by  
+    a set of numerical values, referred to as dimensions, features, or
+ attributes]
+    A --> C[Sequence Data]
+    C --> H[ text, speech, time series, and biological sequences 
+    Each datum can be viewed as a set of features in a particular order,  
+    and the number of features in each datum might vary]
+    A --> D[Spatial Data]
+    D --> I[ images have pixels that are arranged spatially,  
+    and neighboring pixels have closely related values]
+```
+</div>
+<div style="background: #e8f5e9; color: #1b5e20; border: 2px solid #1b5e20; border-radius: 8px; padding: 1rem; max-width: 800px; margin: 1rem auto; font-weight: bold; font-size: 0.8em;">
+&#9989; <span style="font-size:1.1em;">
+In an image, two adjacent pixels are highly likely to have the same value, and most
+ of the information about the image is often embedded in a small number of pixels
+ that lie in the regions of high variability. Machine learning models need to account
+ for these relationships. 
+</span> </div>
+---
+
+### Types of Learning in Inductive Learning
+
+- **Supervised Learning**: The model is trained on a labeled dataset, where each input has a corresponding output label. The goal is to learn a mapping from inputs to outputs. Examples include classification and regression tasks.
+
+- **Unsupervised Learning**: The model is trained on an unlabeled dataset, and the goal is to discover patterns or structures within the data. Examples include clustering and dimensionality reduction tasks.
+
+- **Semi-Supervised Learning**: The model is trained on a combination of labeled and unlabeled data. This approach is useful when obtaining a fully labeled dataset is expensive or time-consuming.
+
+- **Reinforcement Learning**: The model learns by interacting with an environment and receiving feedback in the form of rewards or penalties. The goal is to learn a policy that maximizes cumulative rewards over time.
