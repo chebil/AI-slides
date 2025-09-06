@@ -479,12 +479,38 @@ In an image, two adjacent pixels are highly likely to have the same value, and m
 </span> </div>
 ---
 
+<div align="center">
+
 ### Types of Learning in Inductive Learning
+</div>
+<div align="center" style="display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 1.5rem;">
+    <div style="background: #e3f2fd; border-radius: 8px; padding: 1rem; min-width: 220px; box-shadow: 0 2px 8px rgba(33,150,243,0.08); text-align: center;">
+        <strong>Supervised Learning</strong><br>
+        <span style="font-size:0.95em;">
+            The model is trained on a labeled dataset, where each input has a corresponding output label. The goal is to learn a mapping from inputs to outputs. Examples include classification and regression tasks.
+        </span>
+    </div>
+    <div style="background: #fffde7; border-radius: 8px; padding: 1rem; min-width: 220px; box-shadow: 0 2px 8px rgba(255,235,59,0.08); text-align: center;">
+        <strong>Unsupervised Learning</strong><br>
+        <span style="font-size:0.95em;">
+            The model is trained on an unlabeled dataset, and the goal is to discover patterns or structures within the data. Examples include clustering and dimensionality reduction tasks.
+        </span>
+    </div>
+    <div style="background: #e8f5e9; border-radius: 8px; padding: 1rem; min-width: 220px; box-shadow: 0 2px 8px rgba(76,175,80,0.08); text-align: center;">
+        <strong>Semi-Supervised Learning</strong><br>
+        <span style="font-size:0.95em;">
+            The model is trained on a combination of labeled and unlabeled data. This approach is useful when obtaining a fully labeled dataset is expensive or time-consuming.
+        </span>
+    </div>
+    <div style="background: #fce4ec; border-radius: 8px; padding: 1rem; min-width: 220px; box-shadow: 0 2px 8px rgba(233,30,99,0.08); text-align: center;">
+        <strong>Reinforcement Learning</strong><br>
+        <span style="font-size:0.95em;">
+            The model learns by interacting with an environment and receiving feedback in the form of rewards or penalties. The goal is to learn a policy that maximizes cumulative rewards over time.
+        </span>
+    </div>
+</div>
+---
 
-- **Supervised Learning**: The model is trained on a labeled dataset, where each input has a corresponding output label. The goal is to learn a mapping from inputs to outputs. Examples include classification and regression tasks.
+### Common Machine Learning Algorithms
 
-- **Unsupervised Learning**: The model is trained on an unlabeled dataset, and the goal is to discover patterns or structures within the data. Examples include clustering and dimensionality reduction tasks.
-
-- **Semi-Supervised Learning**: The model is trained on a combination of labeled and unlabeled data. This approach is useful when obtaining a fully labeled dataset is expensive or time-consuming.
-
-- **Reinforcement Learning**: The model learns by interacting with an environment and receiving feedback in the form of rewards or penalties. The goal is to learn a policy that maximizes cumulative rewards over time.
+<img src="/images/ch2/image.png" alt="machine learning algorithms" style="max-width: 500px; display: block; margin: 0 auto;">
