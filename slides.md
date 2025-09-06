@@ -1,6 +1,6 @@
 ---
 theme: default
-background: /images/ai_back.jpg
+background: https://png.pngtree.com/thumb_back/fh260/background/20190223/ourmid/pngtree-artificial-intelligence-future-technology-background-technology-backgroundtechnology-backgroundtechnology-image_73327.jpg
 class: text-center
 highlighter: shiki
 lineNumbers: false
