@@ -137,9 +137,10 @@ Two Main Lines of Research:
 
 - **Knowledge Representation**: Encoding information about the world in a structured format for AI to process
 - **Expert Systems and Planning**: AI use domain-specific knowledge to make decisions and plan actions
-- **From Natural to Artificial Systems**: AI systems that mimic natural biological process (Biological Approach)
-  >- **Artificial Neural Networks**: Modeled after the human brain. – ANN 
-  >- **Evolutionary Algorithms**: Inspired by natural selection (human evolution)
+- **Searching**: AI systems explore possible solutions to find the most optimal path. Ex. Gaming
+  >- **Uninformed Search**: No additional information about states beyond the problem definition (e.g., BFS, DFS)
+  >- **Informed Search**: Uses problem-specific knowledge to find solutions more efficiently (e.g., A*, Greedy Best-First Search)
+
 ---
 
 ## How to achieve AI?
@@ -149,8 +150,10 @@ Two Main Lines of Research:
 <div style="border: 2px solid #e53935; background-color: #e53935; color: #fff; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
 <strong>2. Biological Approach:</strong>
 </div>
- 
-- **Searching**: AI systems explore possible solutions to find the most optimal path. Ex. Gaming
+
+- **From Natural to Artificial Systems**: AI systems that mimic natural biological process
+  >- **Artificial Neural Networks**: Modeled after the human brain. – ANN 
+  >- **Evolutionary Algorithms**: Inspired by natural selection (human evolution)
 - **Learning**: AI systems learn by finding patterns in data and improve over time. Key Types:
   >- **Supervised Learning**: Learning from labeled datasets.
   >- **Unsupervised Learning**: Discovering hidden patterns in unlabeled data.
