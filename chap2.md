@@ -174,50 +174,50 @@ Given the following Sudoku puzzle, fill in the missing numbers to satisfy the co
         </tr>
         <!-- Row 4 -->
         <tr>
+            <td style="border: 2px solid #333; background: #fce4ec; text-align: center;">8</td>
             <td style="border: 2px solid #333; background: #fce4ec; text-align: center;">_</td>
-            <td style="border: 2px solid #333; background: #fce4ec; text-align: center;">6</td>
             <td style="border: 2px solid #333; background: #fce4ec; text-align: center;">_</td>
             <td style="border: 2px solid #333; background: #e0f7fa; text-align: center;">_</td>
+            <td style="border: 2px solid #333; background: #e0f7fa; text-align: center;">6</td>
             <td style="border: 2px solid #333; background: #e0f7fa; text-align: center;">_</td>
-            <td style="border: 2px solid #333; background: #e0f7fa; text-align: center;">_</td>
-            <td style="border: 2px solid #333; background: #fff3e0; text-align: center;">2</td>
-            <td style="border: 2px solid #333; background: #fff3e0; text-align: center;">8</td>
             <td style="border: 2px solid #333; background: #fff3e0; text-align: center;">_</td>
+            <td style="border: 2px solid #333; background: #fff3e0; text-align: center;">_</td>
+            <td style="border: 2px solid #333; background: #fff3e0; text-align: center;">3</td>
         </tr>
         <!-- Row 5 -->
         <tr>
+            <td style="border: 2px solid #333; background: #fce4ec; text-align: center;">4</td>
             <td style="border: 2px solid #333; background: #fce4ec; text-align: center;">_</td>
             <td style="border: 2px solid #333; background: #fce4ec; text-align: center;">_</td>
-            <td style="border: 2px solid #333; background: #fce4ec; text-align: center;">_</td>
-            <td style="border: 2px solid #333; background: #e0f7fa; text-align: center;">4</td>
-            <td style="border: 2px solid #333; background: #e0f7fa; text-align: center;">1</td>
-            <td style="border: 2px solid #333; background: #e0f7fa; text-align: center;">9</td>
+            <td style="border: 2px solid #333; background: #e0f7fa; text-align: center;">8</td>
+            <td style="border: 2px solid #333; background: #e0f7fa; text-align: center;">_</td>
+            <td style="border: 2px solid #333; background: #e0f7fa; text-align: center;">3</td>
             <td style="border: 2px solid #333; background: #fff3e0; text-align: center;">_</td>
             <td style="border: 2px solid #333; background: #fff3e0; text-align: center;">_</td>
-            <td style="border: 2px solid #333; background: #fff3e0; text-align: center;">5</td>
+            <td style="border: 2px solid #333; background: #fff3e0; text-align: center;">1</td>
         </tr>
         <!-- Row 6 -->
         <tr>
-            <td style="border: 2px solid #333; background: #fce4ec; text-align: center;">_</td>
+            <td style="border: 2px solid #333; background: #fce4ec; text-align: center;">7</td>
             <td style="border: 2px solid #333; background: #fce4ec; text-align: center;">_</td>
             <td style="border: 2px solid #333; background: #fce4ec; text-align: center;">_</td>
             <td style="border: 2px solid #333; background: #e0f7fa; text-align: center;">_</td>
-            <td style="border: 2px solid #333; background: #e0f7fa; text-align: center;">8</td>
+            <td style="border: 2px solid #333; background: #e0f7fa; text-align: center;">2</td>
             <td style="border: 2px solid #333; background: #e0f7fa; text-align: center;">_</td>
             <td style="border: 2px solid #333; background: #fff3e0; text-align: center;">_</td>
-            <td style="border: 2px solid #333; background: #fff3e0; text-align: center;">7</td>
-            <td style="border: 2px solid #333; background: #fff3e0; text-align: center;">9</td>
+            <td style="border: 2px solid #333; background: #fff3e0; text-align: center;">_</td>
+            <td style="border: 2px solid #333; background: #fff3e0; text-align: center;">6</td>
         </tr>
         <!-- Row 7 -->
         <tr>
             <td style="border: 2px solid #333; background: #ede7f6; text-align: center;">_</td>
-            <td style="border: 2px solid #333; background: #ede7f6; text-align: center;">4</td>
+            <td style="border: 2px solid #333; background: #ede7f6; text-align: center;">6</td>
             <td style="border: 2px solid #333; background: #ede7f6; text-align: center;">_</td>
             <td style="border: 2px solid #333; background: #f3e5f5; text-align: center;">_</td>
-            <td style="border: 2px solid #333; background: #f3e5f5; text-align: center;">8</td>
             <td style="border: 2px solid #333; background: #f3e5f5; text-align: center;">_</td>
-            <td style="border: 2px solid #333; background: #e1f5fe; text-align: center;">_</td>
-            <td style="border: 2px solid #333; background: #e1f5fe; text-align: center;">3</td>
+            <td style="border: 2px solid #333; background: #f3e5f5; text-align: center;">_</td>
+            <td style="border: 2px solid #333; background: #e1f5fe; text-align: center;">2</td>
+            <td style="border: 2px solid #333; background: #e1f5fe; text-align: center;">8</td>
             <td style="border: 2px solid #333; background: #e1f5fe; text-align: center;">_</td>
         </tr>
         <!-- Row 8 -->
@@ -225,12 +225,12 @@ Given the following Sudoku puzzle, fill in the missing numbers to satisfy the co
             <td style="border: 2px solid #333; background: #ede7f6; text-align: center;">_</td>
             <td style="border: 2px solid #333; background: #ede7f6; text-align: center;">_</td>
             <td style="border: 2px solid #333; background: #ede7f6; text-align: center;">_</td>
-            <td style="border: 2px solid #333; background: #f3e5f5; text-align: center;">3</td>
             <td style="border: 2px solid #333; background: #f3e5f5; text-align: center;">4</td>
-            <td style="border: 2px solid #333; background: #f3e5f5; text-align: center;">2</td>
+            <td style="border: 2px solid #333; background: #f3e5f5; text-align: center;">1</td>
+            <td style="border: 2px solid #333; background: #f3e5f5; text-align: center;">9</td>
             <td style="border: 2px solid #333; background: #e1f5fe; text-align: center;">_</td>
-            <td style="border: 2px solid #333; background: #e1f5fe; text-align: center;">8</td>
             <td style="border: 2px solid #333; background: #e1f5fe; text-align: center;">_</td>
+            <td style="border: 2px solid #333; background: #e1f5fe; text-align: center;">5</td>
         </tr>
         <!-- Row 9 -->
         <tr>
