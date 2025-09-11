@@ -125,9 +125,13 @@ graph LR
 </div>
 
 ---
+layout: center
+---
 
-### Uninformed Search
-- Uninformed search algorithms, also known as blind search algorithms, are a category of search strategies that operate without any domain-specific knowledge about the problem being solved. They explore the search space systematically, relying solely on the structure of the state space and the goal test to find a solution.
+<div style="background: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+	<div align="center"><h3 style="margin-top: 0;">Uninformed Search</h3>
+	Uninformed search algorithms, also known as blind search algorithms, are a category of search strategies that operate without any domain-specific knowledge about the problem being solved. They explore the search space systematically, relying solely on the structure of the state space and the goal test to find a solution.</div>
+</div>
 
 ---
 transition: slide-left
@@ -297,4 +301,201 @@ graph TD
 		classDef highlight fill:#ffeb3b,stroke:#fbc02d,stroke-width:3px;
 ```
 </div>
+</div>
+
+---
+
+### Depth-First Search (DFS)
+
+
+<div style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+	The insertion and deletion operations in the LIST are performed at the end of the list, making it a Last In First Out (LIFO) structure. This means that the most recently added node is expanded first, leading to a deep exploration of the search space before backtracking.
+</div>
+
+<div style="display: flex; gap: 2rem;">
+	<div style="flex: 1;">
+
+```mermaid
+
+graph LR
+
+	S((S)):::highlight --> a((a))
+	S --> d((d))
+	S --> p((p))
+
+	a --> b((b))
+	a --> c((c))
+	d --> b
+	d --> c
+	d --> e((e))
+	c --> e
+
+	e --> f((f))
+	f --> G((G)):::highlight
+	e --> h((h))
+	e --> r((r))
+
+	p --> q((q))
+	q --> h
+	p --> e
+
+	classDef highlight fill:#ffeb3b,stroke:#fbc02d,stroke-width:3px;
+	classDef explored fill:#c8e6c9,stroke:#388e3c,stroke-width:2px;
+	class S,a,b,c,e,f explored;
+```
+
+</div>
+<div style="flex: 1;">
+		
+```mermaid
+graph TD
+		S:::highlight --> a
+		S --> d
+		S --> p
+
+		a --> b
+		a --> c
+
+		d --> b2[b]
+		d --> c2[c]
+		d --> e1[e]
+
+		c --> e2[e]
+
+		p --> q
+		p --> e3[e]
+
+		q --> h1[h]
+
+		e1 --> f1[f]
+		e1 --> h2[h]
+		e1 --> r1[r]
+
+		e2 --> f2[f]
+		e2 --> h3[h]
+		e2 --> r2[r]
+
+		e3 --> f3[f]
+		e3 --> h4[h]
+		e3 --> r3[r]
+
+		f1 --> G1[G]:::highlight
+		f2 --> G2[G]:::highlight
+		f3 --> G3[G]:::highlight
+		classDef highlight fill:#ffeb3b,stroke:#fbc02d,stroke-width:3px;
+		classDef explored fill:#c8e6c9,stroke:#388e3c,stroke-width:2px;
+		class S,a,b,c,e2,f2 explored;
+```
+</div>
+</div>
+
+---
+
+### Breadth-First Search (BFS)
+
+
+<div style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+	The insertion operation is performed at the end of the list, while the deletion operation is performed at the front of the list, making it a First In First Out (FIFO) structure. This means that nodes are expanded in the order they were added, leading to a level-by-level exploration of the search space.
+</div>
+
+<div style="display: flex; gap: 2rem;">
+	<div style="flex: 1;">
+
+```mermaid
+
+graph LR
+
+	S((S)):::highlight --> a((a))
+	S --> d((d))
+	S --> p((p))
+
+	a --> b((b))
+	a --> c((c))
+	d --> b
+	d --> c
+	d --> e((e))
+	c --> e
+
+	e --> f((f))
+	f --> G((G)):::highlight
+	e --> h((h))
+	e --> r((r))
+
+	p --> q((q))
+	q --> h
+	p --> e
+
+	classDef highlight fill:#ffeb3b,stroke:#fbc02d,stroke-width:3px;
+	classDef explored fill:#c8e6c9,stroke:#388e3c,stroke-width:2px;
+	class S,a,d,p,b,c,e,q,f,h,r explored;
+```
+
+</div>
+<div style="flex: 1;">
+		
+```mermaid
+graph TD
+		S:::highlight --> a
+		S --> d
+		S --> p
+
+		a --> b
+		a --> c
+
+		d --> b2[b]
+		d --> c2[c]
+		d --> e1[e]
+
+		c --> e2[e]
+
+		p --> q
+		p --> e3[e]
+
+		q --> h1[h]
+
+		e1 --> f1[f]
+		e1 --> h2[h]
+		e1 --> r1[r]
+
+		e2 --> f2[f]
+		e2 --> h3[h]
+		e2 --> r2[r]
+
+		e3 --> f3[f]
+		e3 --> h4[h]
+		e3 --> r3[r]
+
+		f1 --> G1[G]:::highlight
+		f2 --> G2[G]:::highlight
+		f3 --> G3[G]:::highlight
+		classDef highlight fill:#ffeb3b,stroke:#fbc02d,stroke-width:3px;
+		classDef explored fill:#c8e6c9,stroke:#388e3c,stroke-width:2px;
+		class S,a,d,p,b,c,b2,c2,e1,e2,q,e3,h1,f1,h2,r1,f2,f3,h3,r2,h4,r3 explored;
+```
+</div>
+</div>
+
+---
+
+### Depth-First Search vs Breadth-First Search
+
+<div style="display: flex; gap: 2rem;">
+	<div style="flex: 1;">
+		<div style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+			<strong>Depth-First Search (DFS)</strong><br>
+			- Explores as far down a branch as possible before backtracking.<br>
+			- Uses less memory, as it only needs to store the current path and unexplored siblings.<br>
+			- Can get stuck in deep or infinite branches if not managed properly.<br>
+			- Not guaranteed to find the shortest path to the goal.
+		</div>
+	</div>
+	<div style="flex: 1;">
+		<div style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+			<strong>Breadth-First Search (BFS)</strong><br>
+			- Explores all nodes at the present depth level before moving on to nodes at the next depth level.<br>
+			- Uses more memory, as it needs to store all nodes at the current level.<br>
+			- Guaranteed to find the shortest path to the goal if one exists.<br>
+			- Can be slower than DFS in terms of time complexity for deep trees.
+		</div>
+	</div>
 </div>
