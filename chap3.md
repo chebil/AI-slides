@@ -126,6 +126,7 @@ graph LR
 
 ---
 layout: center
+title: Uninformed Search
 ---
 
 <div style="background: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
@@ -479,23 +480,142 @@ graph TD
 
 ### Depth-First Search vs Breadth-First Search
 
-<div style="display: flex; gap: 2rem;">
+<div style="display: flex; gap: 2rem; align-items: flex-start;">
 	<div style="flex: 1;">
-		<div style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+		<div style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 12px; padding: 1rem; font-size: 0.98rem;">
 			<strong>Depth-First Search (DFS)</strong><br>
-			- Explores as far down a branch as possible before backtracking.<br>
-			- Uses less memory, as it only needs to store the current path and unexplored siblings.<br>
-			- Can get stuck in deep or infinite branches if not managed properly.<br>
-			- Not guaranteed to find the shortest path to the goal.
+			<ul style="margin: 0.5rem 0 0 1rem; padding: 0;">
+				<li>Explores deep into branches before backtracking.</li>
+				<li>Uses less memory (stores current path).</li>
+				<li>May get stuck in infinite branches.</li>
+				<li>Not guaranteed to find shortest path.</li>
+			</ul>
+		</div>
+		<div style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 12px; padding: 1rem; font-size: 0.98rem; margin-top: 1rem;">
+			<strong>Breadth-First Search (BFS)</strong><br>
+			<ul style="margin: 0.5rem 0 0 1rem; padding: 0;">
+				<li>Explores nodes level by level.</li>
+				<li>Uses more memory (stores all nodes at current level).</li>
+				<li>Guaranteed to find shortest path.</li>
+				<li>Can be slower for deep trees.</li>
+			</ul>
 		</div>
 	</div>
-	<div style="flex: 1;">
-		<div style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
-			<strong>Breadth-First Search (BFS)</strong><br>
-			- Explores all nodes at the present depth level before moving on to nodes at the next depth level.<br>
-			- Uses more memory, as it needs to store all nodes at the current level.<br>
-			- Guaranteed to find the shortest path to the goal if one exists.<br>
-			- Can be slower than DFS in terms of time complexity for deep trees.
-		</div>
+	<div style="flex-shrink: 0;">
+		<img src="/images/ch3/bfsdfs.png" alt="DFS vs BFS illustration" style="width: 400px; max-width: 100%; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-top: 0.5rem;" />
 	</div>
 </div>
+
+---
+
+### Uniform Cost Search (UCS)
+
+<div style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+	Uniform Cost Search (UCS) is an uninformed search algorithm that expands the least costly node first, ensuring that the path to the goal is optimal in terms of cost. It uses a priority queue to manage the frontier, where nodes are prioritized based on their cumulative cost from the start state.
+</div>
+
+<div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+	<div style="flex: 1; min-width: 0;">
+
+```mermaid
+graph LR
+
+    S((S)) -->|12| a((a))
+    S -->|6| d((d))
+    S -->|1| p((p))   
+
+    a -->|2| b((b))
+    a -->|3| c((c))
+    d -->|4| b
+    d -->|6| c
+    d -->|8| e((e))
+    c -->|2| e
+
+    e -->|2| f((f))
+    f -->|1| G((G))
+    e -->|5| h((h))
+    e -->|9| r((r))
+
+    p -->|1| q((q))
+    q -->|2| h
+    p -->|2| e
+```
+</div>
+	<div style="flex: 1; min-width: 0;">
+
+```mermaid
+graph LR
+
+    S((S)) -->|12| a((a))
+    S -->|6| d((d))
+    S -->|1| p((p))
+
+    a -->|2| b((b))
+    a -->|3| c((c))
+    d -->|4| b
+    d -->|6| c
+    d -->|8| e((e))
+    c -->|2| e
+
+    e -->|2| f((f))
+    f -->|1| G((G))
+    e -->|5| h((h))
+    e -->|9| r((r))
+
+    p -->|1| q((q))
+    q -->|2| h
+    p -->|2| e
+
+    %% Highlight UCS order (by cost)
+    style S fill:#ffcc00,stroke:#333,stroke-width:2px
+    style p fill:#ffe599,stroke:#333,stroke-width:2px
+    style q fill:#f9cb9c,stroke:#333,stroke-width:2px
+    style e fill:#9fc5e8,stroke:#333,stroke-width:2px
+    style f fill:#6fa8dc,stroke:#333,stroke-width:2px
+    style G fill:#38761d,stroke:#fff,stroke-width:2px
+```
+</div>
+</div>
+---
+
+### Case Study: Eight-Puzzle Problem
+
+<div style="display: flex; gap: 2rem; align-items: flex-start;">
+	<div style="flex: 1; min-width: 0;">
+		<img src="https://media.geeksforgeeks.org/wp-content/uploads/20240726131204/8-puzzle-Problem.webp" alt="8-Puzzle Problem" style="width: 500px; display: block; margin: auto;" />
+		<img src="https://media.geeksforgeeks.org/wp-content/uploads/puzzle-1.jpg" alt="8-Puzzle Problem" style="width: 300px; max-width: 500px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);" />
+	</div>
+	<div style="flex: 2; min-width: 0;">
+		<div style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+			The Eight-Puzzle is a sliding puzzle that consists of a 3x3 grid with eight numbered tiles and one empty space. The objective is to arrange the tiles in a specific order by sliding them into the empty space.
+		</div>
+		<div style="background: #fce4ec; border: 2px solid #e91e63; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+			<strong>State Space:</strong> Each state represents a configuration of the tiles on the board.<br>
+			<strong>Successor Function:</strong> Generates all possible configurations by sliding a tile into the empty space.<br>
+			<strong>Start State:</strong> An initial configuration of the tiles.<br>
+			<strong>Goal Test:</strong> A configuration where the tiles are arranged in the desired order.
+		</div>
+	</div>	
+</div>
+
+---
+
+### Case Study: Online Maze Search
+
+<img src="/images/ch3/maze.png" alt="Maze" style="width: 600px; display: block; margin: auto;" />
+	<div style="background: #fce4ec; border: 2px solid #e91e63; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+		<strong>State Space:</strong> Each state represents the agent's current position in the maze.<br>
+		<strong>Successor Function:</strong> Generates possible moves (up, down, left, right) based on the agent's current position and the maze layout.<br>
+		<strong>Start State:</strong> The initial position of the agent in the maze.<br>
+		<strong>Goal Test:</strong> The agent reaches the goal location.
+	</div>
+---
+layout: center
+title: Informed Search
+---
+
+<div style="background: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+	<div align="center"><h3 style="margin-top: 0;">Informed Search</h3>
+	Informed search algorithms, also known as heuristic search algorithms, are a category of search strategies that utilize domain-specific knowledge to guide the search process. They employ heuristics, which are problem-specific rules or strategies, to estimate the cost of reaching the goal from a given state. This allows informed search algorithms to explore the search space more efficiently and effectively than uninformed search algorithms.</div>
+</div>
+---
