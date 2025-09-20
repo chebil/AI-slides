@@ -1074,3 +1074,49 @@ Solving the Travelling Salesman Problem (TSP) using Hill Climbing:
 
 ![local optima](/images/ch3/hill3.svg){style="width: 500px; display: block; margin: auto;"}
 
+---
+
+### Tabu Search
+
+<div style="background: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+
+- Tabu Search is an advanced local search algorithm that enhances the basic hill climbing approach by incorporating memory structures to avoid cycling back to previously visited solutions. It maintains a list of "tabu" moves or solutions that are temporarily forbidden, allowing the search to explore new areas of the solution space and escape local optima.
+</div>
+
+```python
+Algorithm TabuSearch(Initial State: s, Loss function: L(·))
+ begin
+	CURRENT={s};
+	VISIT= {}; { VISIT is the Tabu [taboo] list }
+	repeat
+		Add CURRENT to VISIT;
+		if all neighbors of CURRENT are in VISIT then set RANDOM= φ;
+			else set RANDOM to a random neighbor of CURRENT that is not in VISIT;
+		Scan adjacent states to CURRENT until all states are scanned or a
+		state NEXT∈ VISIT is found with lower loss than CURRENT;
+		if a state NEXT∈ VISIT was found with lower loss than that of CURRENT
+			then set CURRENT=NEXT else if RANDOM= φ set CURRENT=RANDOM;
+	until RANDOM= φ;
+	return CURRENT;
+ end
+```
+---
+
+### Tabu Search (continued)
+
+- The previous algorithm represent the basic version of Tabu Search. 
+- In practice, Tabu Search can be enhanced with additional strategies, such as:
+	-  Instead of selecting any neighbor that can improve the loss function, **the best possible unvisited neighbor** is commonly used
+	- **Tabu List Size**: Limiting the size of the tabu list to a fixed number of recent moves to balance exploration and memory usage. If the list exceeds this size, the oldest entry is removed.
+	- **Aspiration Criteria**: Allowing tabu moves if they result in a solution better than any previously found.
+	- **Intensification and Diversification**: Focusing the search on promising areas (intensification) or exploring new areas (diversification) to balance exploration and exploitation.
+- Tabu Search is particularly effective for combinatorial optimization problems, such as the traveling salesman problem, job scheduling, and vehicle routing, where the search space is large and complex.
+
+---
+
+### Simulated Annealing
+
+<div style="background: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+- Simulated Annealing is a probabilistic optimization algorithm inspired by the annealing process in metallurgy, where controlled cooling of materials leads to the formation of a stable crystalline structure. The algorithm mimics this process by allowing occasional uphill moves (i.e., moves to worse solutions) to escape local optima and explore the solution space more thoroughly.
+</div>
+
