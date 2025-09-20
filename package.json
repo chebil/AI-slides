@@ -11,7 +11,9 @@
     "@slidev/cli": "^0.47.0",
     "@slidev/theme-default": "latest",
     "katex": "^0.16.22",
-    "playwright": "^1.55.0"
+    "playwright": "^1.55.0",
+    "shiki": "^3.13.0",
+    "shiki-magic-move": "^1.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

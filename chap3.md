@@ -924,3 +924,97 @@ graph LR
 </div>
 </div>
 ---
+
+### A* Search Algorithm
+
+<div style="border: 2px solid #e53935; background-color: #e53935; color: #fff; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+<strong>When should A* terminate?</strong>
+</div>
+
+- A* should terminate **[when the goal node is selected for expansion from the list]{style="color:blue"}**. This ensures that the path found is optimal, as A* expands nodes based on the lowest estimated total cost (f(n) = g(n) + h(n)), where g(n) is the cost from the start node to node n, and h(n) is the heuristic estimate from node n to the goal.
+- **[If the list becomes empty before reaching the goal node, it indicates that there is no path]{style="color:blue"}**
+
+<div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+	<div style="flex: 1; min-width: 0;">
+
+```mermaid
+graph LR
+    S(S<br>h=3) -->|2| a(a<br>h=2)
+    a -->|2| G(G<br>h=0)
+    S -->|2| b(b<br>h=1)
+    b -->|3| G
+```
+</div>
+<div style="flex: 1; min-width: 0;">
+
+```mermaid
+graph LR
+	S(S<br>f=2+3) -->|2| a(a<br>f=2+2)
+	S(S<br>f=2+3) -->|2| b(b<br>f=2+1)
+	b -->|3| G(G<br>f=5+0)
+	classDef explored fill:#c8e6c9,stroke:#388e3c,stroke-width:2px;
+	class S,b,G explored;
+```
+</div>
+<div v-click style="flex: 1; min-width: 0;">
+
+```mermaid
+graph LR
+	S(S<br>f=2+3) -->|2| a(a<br>f=2+2)
+	S(S<br>f=2+3) -->|2| b(b<br>f=2+1)
+	b -->|3| G(G<br>f=5+0)
+	a -->|2| G1(G<br>f=4+0)
+	classDef explored fill:#c8e6c9,stroke:#388e3c,stroke-width:2px;
+	class S,a,G1 explored;
+```
+</div>
+</div>
+
+---
+
+### A* Search Algorithm
+
+<div style="border: 2px solid #e53935; background-color: #e53935; color: #fff; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+<strong>Is A* Optimal?</strong>
+</div>
+
+<div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+	<div style="flex: 1; min-width: 0;">
+
+```mermaid
+graph LR
+    S(S<br>h=7) -->|1| a(a<br>h=6)
+    a -->|3| G(G<br>h=0)
+    S -->|5| G
+```
+</div>
+<div style="flex: 1; min-width: 0;">
+
+```mermaid
+graph LR
+	S(S<br>f=0+7) -->|1| a(a<br>f=1+6)
+	S(S<br>f=2+3) -->|5| G(G<br>f=5+0)
+	classDef explored fill:#c8e6c9,stroke:#388e3c,stroke-width:2px;
+	class S,G explored;
+```
+</div>
+</div>
+
+- A* is optimal if the heuristic function h(n) is **[admissible]{style="color:blue"}**, meaning it never overestimates the true cost to reach the goal from node n. In other words, for every node n, h(n) must be less than or equal to the actual cost of the optimal path from n to the goal.
+- **[If h(n) is admissible, A* will always find the optimal path to the goal node when it terminates.]{style="color:red"}**
+
+---
+
+### Local Search Algorithms
+
+<div style="background: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+
+- Local search algorithms are a category of optimization techniques that focus on exploring the immediate neighborhood of the current solution to find an improved solution.     
+- Unlike global search algorithms that explore the entire search space, local search algorithms make incremental changes to the current solution, aiming to find a better solution by iteratively refining it.
+- They are particularly useful for solving large-scale optimization problems where the search space is vast and complex.
+
+**[What are scenarios in which the final state matters rather than the path required to reach it?]{style="color:red;"}**
+</div>
+
+- **[The eight-queens problem]{style="color:red"}**: The final arrangement of the queens matters, not the sequence of moves taken to achieve it.  
+- **[The traveling salesman problem]{style="color:red"}**: The final route matters, not the cities visiting order during the search process.

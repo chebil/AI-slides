@@ -13,6 +13,15 @@ drawings:
 transition: slide-left
 title: Advanced Artificial Intelligence Concepts and Techniques 
 mdc: true
+download: true
+exportFilename: Advanced_AI
+record: build
+export:
+  format: pdf
+  timeout: 30000
+  dark: false
+  withClicks: false
+  withToc: false
 ---
 
 # Advanced Artificial Intelligence Concepts and Techniques
