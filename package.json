@@ -10,7 +10,8 @@
   "dependencies": {
     "@slidev/cli": "^0.47.0",
     "@slidev/theme-default": "latest",
-    "katex": "^0.16.22"
+    "katex": "^0.16.22",
+    "playwright": "^1.55.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

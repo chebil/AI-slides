@@ -126,11 +126,11 @@ graph LR
 
 ---
 layout: center
-title: Uninformed Search
 ---
+## Uninformed Search
 
 <div style="background: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
-	<div align="center"><h3 style="margin-top: 0;">Uninformed Search</h3>
+	<div align="center">
 	Uninformed search algorithms, also known as blind search algorithms, are a category of search strategies that operate without any domain-specific knowledge about the problem being solved. They explore the search space systematically, relying solely on the structure of the state space and the goal test to find a solution.</div>
 </div>
 
@@ -138,7 +138,7 @@ title: Uninformed Search
 transition: slide-left
 ---
 
-## Generic Search Algorithm
+### Generic Search Algorithm
 
 The generic search algorithm forms the basis for many search strategies (BFS, DFS, etc.). It maintains a frontier of states to explore and a set of explored states to avoid revisiting.
 
@@ -610,12 +610,317 @@ graph LR
 		<strong>Goal Test:</strong> The agent reaches the goal location.
 	</div>
 ---
+
+### [Improving Efficiency with Bidirectional Search]{style="font-size: 1.8rem; font-weight: bold; color: #1976d2;"}
+
+- Simultaneously explores the search space from both the [start state]{style="color:red"} (forward direction) and the [goal state]{style="color:red"} (backward direction). 
+- The search continues until the two searches meet in the **[same node]{style="color:red"}**.
+
+```python{1-3|4-13|14-17|*}
+Algorithm BiSearch(Initial State: s, Goal State: g)
+ begin
+	FLIST= { s }; BLIST= { g };
+	repeat
+		Select current node if from FLIST based on pre-defined strategy;
+		Select current node ib from BLIST based on pre-defined strategy;
+		Delete nodes if and ib respectively from FLIST and BLIST;
+		Add nodes if and ib to the hash tables FVISIT and BVISIT, respectively;
+		for each node j ∈ A(if) not in FVISIT reachable from if do
+			Add j to FLIST; pred(j)=if;
+		for each node j ∈ B(ib) not in BVISIT do
+			Add j to BLIST; succ(j)=ib;
+	until FLIST or BLIST is empty or (FLIST ∩ BLIST)= {};
+	if (either FLIST or BLIST is empty) return failure;
+		else return success;
+	{ Reconstruct source-goal path by selecting any node in FLIST ∩ BLIST
+	and tracing predecessor and successor lists from that node; }
+ end
+```
+---
 layout: center
-title: Informed Search
 ---
 
+## Informed Search
 <div style="background: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
-	<div align="center"><h3 style="margin-top: 0;">Informed Search</h3>
-	Informed search algorithms, also known as heuristic search algorithms, are a category of search strategies that utilize domain-specific knowledge to guide the search process. They employ heuristics, which are problem-specific rules or strategies, to estimate the cost of reaching the goal from a given state. This allows informed search algorithms to explore the search space more efficiently and effectively than uninformed search algorithms.</div>
+
+- Informed search algorithms, also known as heuristic search algorithms, are a category of search strategies that utilize domain-specific knowledge to guide the search process.  
+- They employ heuristics, which are problem-specific rules or strategies, to estimate the cost of reaching the goal from a given state.  
+- This allows informed search algorithms to explore the search space more efficiently and effectively than uninformed search algorithms.
+
+</div>
+---
+
+<div style="border: 2px solid #e53935; background-color: #e53935; color: #fff; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+<strong>
+
+### Best-First Search (Greedy Search)
+
+</strong>
+</div>
+
+- Best-First Search is an informed search algorithm that selects the most promising node to expand based on a **[heuristic function]{style=color:red}**, which estimates the cost from the current node to the goal. The algorithm uses a priority queue to manage the frontier, prioritizing nodes with lower heuristic values.
+- In many such problems, each path between a pair of nodes is associated with a cost, and the goal of the informed search process is to find a
+ path of the smallest cost from the source to the goal node. 
+- The cost of a path is assumed to be the sum of the costs on the individual edges, although more general path costs are possible.
+
+---
+
+<div style="border: 2px solid #e53935; background-color: #e53935; color: #fff; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+<strong>
+Best-First Search (Greedy Search) VS The Uniform Cost Search
+</strong>
+</div>
+
+
+Using The Uniform Cost Search (UCS) algorithm, The path from the start node S to the goal node G:
+
+[First Step]{style="color:red; font-weight: bold;"}: The node S is expanded first, and its neighbor a is added to the list with its respective costs.
+[Second Step]{style="color:red; font-weight: bold;"}: The node a is expanded next, and its neighbors b, e, and d are added to the list with their respective costs. The node b has the lowest cost (1), so it is selected for expansion next.  
+[Third Step]{style="color:red; font-weight: bold;"}: The node b is expanded, and its neighbor c is added to the list with its respective cost. The node c has the lowest cost (1), so it is selected for expansion next.  
+[Fourth Step]{style="color:red; font-weight: bold;"}: The node c is a dead end. The next node with the lowest cost is d (3), so it is selected for expansion next.
+
+<div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+	<div style="flex: 1; min-width: 0;">
+
+```mermaid
+graph LR
+    S -->|1| a
+    a -->|3| d
+    a -->|1| b
+    a -- 8 --> e
+    b -->|1| c
+    e -->|1| d
+    d -->|2| G
+	classDef Highlight fill:#ffeb3b,stroke:#fbc02d,stroke-width:3px;
+	classDef explored fill:#c8e6c9,stroke:#388e3c,stroke-width:2px;
+	class S,G Highlight;
+	class a,b,c explored;
+```
+</div>
+<div style="flex: 1; min-width: 0;">
+
+```mermaid
+graph LR
+	S:::Highlight -->|1| a
+	a -->|3| d
+	a -->|1| b
+	a -->|8| e
+	b -->|1| c
+	e -->|1| d1[d]
+	d1 -->|2| G
+	d -->|2| G1[G]
+	classDef Highlight fill:#ffeb3b,stroke:#fbc02d,stroke-width:3px;
+	classDef explored fill:#c8e6c9,stroke:#388e3c,stroke-width:2px;
+	class S,G,G1 Highlight;
+	class a,b,c explored;
+```
+</div>
+</div>
+
+---
+
+<div style="border: 2px solid #e53935; background-color: #e53935; color: #fff; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+<strong>Best-First Search (Greedy Search) VS The Uniform Cost Search</strong>
+</div>
+
+Using The Uniform Cost Search (UCS) algorithm, The path from the start node S to the goal node G:
+
+[Fourth Step]{style="color:red; font-weight: bold;"}: The node c is a dead end. The next node with the lowest cost is d (3), so it is selected for expansion next.  
+[Final Step]{style="color:red; font-weight: bold;"}: The node d is expanded, and its neighbor G is added to the list with its respective cost. The node G is the goal node.
+
+<div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+	<div style="flex: 1; min-width: 0;">
+
+```mermaid
+graph LR
+    S -->|1| a
+    a -->|3| d
+    a -->|1| b
+    a -- 8 --> e
+    b -->|1| c
+    e -->|1| d
+    d -->|2| G
+	classDef Highlight fill:#ffeb3b,stroke:#fbc02d,stroke-width:3px;
+	classDef explored fill:#c8e6c9,stroke:#388e3c,stroke-width:2px;
+	class S,G Highlight;
+	class a,d,b,c explored;
+```
+</div>
+<div style="flex: 1; min-width: 0;">
+
+```mermaid
+graph LR
+	S:::Highlight -->|1| a
+	a -->|3| d
+	a -->|1| b
+	a -->|8| e
+	b -->|1| c
+	e -->|1| d1[d]
+	d1 -->|2| G
+	d -->|2| G1[G]
+	classDef Highlight fill:#ffeb3b,stroke:#fbc02d,stroke-width:3px;
+	classDef explored fill:#c8e6c9,stroke:#388e3c,stroke-width:2px;
+	class S,G,G1 Highlight;
+	class a,d,b,c explored;
+```
+</div>
+</div>
+
+
+---
+
+<div style="border: 2px solid #e53935; background-color: #e53935; color: #fff; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+<strong>Best-First Search (Greedy Search)</strong>
+</div>
+
+Using The Best-First Search (Greedy Search) algorithm, an estimation of the cost from each node to the goal node G is provided by a heuristic function h(n).
+
+<div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+	<div style="flex: 1; min-width: 0;">
+
+```mermaid
+graph LR
+    S(S<br>h=6) -->|1| a(a<br>h=5)
+    a -->|3| d(d<br>h=2)
+    a -->|1| b(b<br>h=6)
+    a -- 8 --> e(e<br>h=1)
+    b -->|1| c(c<br>h=7)
+    e -->|1| d
+    d -->|2| G(G<br>h=0)
+```
+</div>
+<div style="flex: 1; min-width: 0;">
+
+- A Heuristic Function h(n) is used to estimate the cost from node n to the goal node G. It could be:  
+	- The straight-line distance between two cities in a route-finding problem.	
+	- The Manhattan distance in a grid-based pathfinding problem.
+	- The number of misplaced tiles in the 8-puzzle problem.
+</div>
+</div>
+
+<div style="display: flex; gap: 1.5rem; align-items: center;">
+	<img src="/images/ch3/Best1.png" alt="Straight-line distance" style="width: 150px;" />
+	<img src="/images/ch3/Best2.svg" alt="Straight-line distance" style="width: 150px;" />
+	<img src="/images/ch3/Best3.png" alt="Straight-line distance" style="width: 150px;" />
+</div>
+---
+
+<div style="border: 2px solid #e53935; background-color: #e53935; color: #fff; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+<strong>Best-First Search (Greedy Search)</strong>
+</div>
+
+- [First Step]{style="color:red; font-weight: bold;"}: The node S is expanded first, and its neighbor a is added to the list with its heuristic values.  
+- [Second Step]{style="color:red; font-weight: bold;"}: The node a is expanded next, and its neighbors b, e, and d are added to the list with their respective heuristic values. The node e has the lowest heuristic value (1), so it is selected.  
+- [Third Step]{style="color:red; font-weight: bold;"}: The node e is expanded, and its neighbor d is added to the list with its respective heuristic value. The node d has the lowest heuristic value (2), so it is selected for expansion next.    
+
+<div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+	<div style="flex: 1; min-width: 0;">
+
+```mermaid
+graph LR
+    S(S<br>h=6) -->|1| a(a<br>h=5)
+    a -->|3| d(d<br>h=2)
+    a -->|1| b(b<br>h=6)
+    a -- 8 --> e(e<br>h=1)
+    b -->|1| c(c<br>h=7)
+    e -->|1| d
+    d -->|2| G(G<br>h=0)
+	classDef Highlight fill:#ffeb3b,stroke:#fbc02d,stroke-width:3px;
+	classDef explored fill:#c8e6c9,stroke:#388e3c,stroke-width:2px;
+	class S,G Highlight;
+	class a,e,d explored;
+```
+</div>
+<div style="flex: 1; min-width: 0;">
+
+```mermaid
+graph LR
+	S(S<br>h=6):::Highlight -->|1| a(a<br>h=5)
+	a -->|3| d(d<br>h=2)
+	a -->|1| b(b<br>h=6)
+	a -- 8 --> e(e<br>h=1)
+	b -->|1| c(c<br>h=7)
+	e -->|1| d1[d<br>h=2]
+	d1 -->|2| G(G<br>h=0)
+	d -->|2| G1[G<br>h=0]
+	classDef Highlight fill:#ffeb3b,stroke:#fbc02d,stroke-width:3px;
+	classDef explored fill:#c8e6c9,stroke:#388e3c,stroke-width:2px;
+	class S,G,G1 Highlight;
+	class a,e,d1 explored;
+```
+</div>
+</div>
+---
+
+### A* Search Algorithm
+
+<div style="border: 2px solid #e53935; background-color: #e53935; color: #fff; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+<strong>Combining the Best-First Search and Uniform Cost Search	</strong>
+</div>
+
+```python{*|8-12|13|14|15}
+Algorithm GenericSearch(Initial State: s, Goal Condition: G)
+ begin
+	LIST= { s };
+	repeat
+		Select current node i from LIST based on pre-defined strategy;
+		Delete node i from LIST;
+		Add node i to the hash table VISIT;
+		for all nodes j ∈ A(i) directly connected to i via transition do
+		begin
+			if (j is not in VISIT) add j to LIST;
+			pred(j)=i;
+			choose the node j according to f(j):
+				f(j) = min{c(j)} // Uniform Cost Search
+				f(j) = min{h(j)} // Best-First Search
+				f(j) = min{c(j) + h(j)} // A* Search 
+		end
+	until LIST is empty or current node i satisfies G;
+	if current node satisfies G return success
+		else return failure;
+	{ The predecessor array can be used to trace back path from i to s }
+ end
+```
+---
+
+### A* Search Algorithm
+
+<div style="border: 2px solid #e53935; background-color: #e53935; color: #fff; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+<strong>Combining the Best-First Search and Uniform Cost Search	</strong>
+</div>
+
+<div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+	<div style="flex: 1; min-width: 0;">
+
+```mermaid
+graph LR
+    S(S<br>h=6) -->|1| a(a<br>h=5)
+    a -->|3| d(d<br>h=2)
+    a -->|1| b(b<br>h=6)
+    a -- 8 --> e(e<br>h=1)
+    b -->|1| c(c<br>h=7)
+    e -->|1| d
+    d -->|2| G(G<br>h=0)
+	classDef Highlight fill:#ffeb3b,stroke:#fbc02d,stroke-width:3px;
+	classDef explored fill:#c8e6c9,stroke:#388e3c,stroke-width:2px;
+	class S,G Highlight;
+	class a,d explored;
+```
+</div>
+<div style="flex: 1; min-width: 0;">
+
+```mermaid
+graph LR
+	S(S<br>f=0+6):::Highlight -->|1| a(a<br>f=1+5)
+	a -->|3| d(d<br>f=4+2)
+	a -->|1| b(b<br>f=2+6)
+	a -- 8 --> e(e<br>f=9+1)
+	d -->|2| G1[G<br>f=6+0]
+	classDef Highlight fill:#ffeb3b,stroke:#fbc02d,stroke-width:3px;
+	classDef explored fill:#c8e6c9,stroke:#388e3c,stroke-width:2px;
+	class S,G,G1 Highlight;
+	class a,d explored;
+```
+</div>
 </div>
 ---
