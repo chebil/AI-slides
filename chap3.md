@@ -1018,3 +1018,59 @@ graph LR
 
 - **[The eight-queens problem]{style="color:red"}**: The final arrangement of the queens matters, not the sequence of moves taken to achieve it.  
 - **[The traveling salesman problem]{style="color:red"}**: The final route matters, not the cities visiting order during the search process.
+
+---
+
+### Hill Climbing
+
+<div style="background: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+
+- Hill Climbing is a local search algorithm that iteratively moves towards the neighbor state with the highest value (or lowest cost) until no better neighbors are found. It is a greedy algorithm that makes decisions based solely on local information, without considering the global structure of the search space.
+</div>
+
+```python
+Algorithm HillClimb(Initial State: s, Loss function: L(·))
+ begin
+	CURRENT={s};
+	repeat
+		Scan adjacent states to CURRENT until all states are scanned or a
+		state NEXT is found with lower loss than CURRENT;
+		if a state NEXT was found with lower loss than that of CURRENT
+			set CURRENT=NEXT;
+	until no improvement in previous iteration;
+	return CURRENT;
+ end
+```
+---
+
+### Hill Climbing Example 1
+
+Solving the 8-queens problem using Hill Climbing:
+- Start with a random configuration of 8 queens on the chessboard.
+- Evaluate the number of pairs of queens attacking each other (the loss function).
+- Move a queen to a different position in its column to reduce the number of attacking pairs.
+- Repeat the process until a configuration with zero attacking pairs is found or no further improvements can be made.
+
+![hill climbing](/images/ch3/hill.png){style="width: 400px; display: block; margin: auto;"}
+
+---
+
+### Hill Climbing Example 2
+
+Solving the Travelling Salesman Problem (TSP) using Hill Climbing:
+- Start with a random tour of the cities.
+- Evaluate the total distance of the tour (the loss function).
+- Swap the positions of two cities in the tour to reduce the total distance.
+- Repeat the process until no further improvements can be made.
+![hill climbing TSP](/images/ch3/hill2.png){style="width: 400px; display: block; margin: auto;"}
+
+---
+
+### The Problem of Local Optima
+
+<div style="background: #ffebee; border: 2px solid #f44336; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+- Hill Climbing can get stuck in local optima, where no neighboring state has a better value, but the current state is not the global optimum. This can lead to suboptimal solutions.
+</div>
+
+![local optima](/images/ch3/hill3.svg){style="width: 500px; display: block; margin: auto;"}
+
