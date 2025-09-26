@@ -1115,8 +1115,90 @@ Algorithm TabuSearch(Initial State: s, Loss function: L(·))
 ---
 
 ### Simulated Annealing
-
+<br/>
+<br/>
 <div style="background: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
-- Simulated Annealing is a probabilistic optimization algorithm inspired by the annealing process in metallurgy, where controlled cooling of materials leads to the formation of a stable crystalline structure. The algorithm mimics this process by allowing occasional uphill moves (i.e., moves to worse solutions) to escape local optima and explore the solution space more thoroughly.
+
+- Simulated Annealing is a probabilistic optimization algorithm inspired by the annealing process in metallurgy.
+- The algorithm allows moves to worse solutions with a certain probability, which enables the search to escape local optima and explore the solution space more thoroughly.
+- Since the algorithm can accept worse solutions, it stores the best solution found during the search process.
+- The probability of accepting worse solutions decreases over time, controlled by a temperature parameter that gradually cools down.
 </div>
+
+---
+
+### The simulated annealing algorithm
+
+<br>
+
+```python
+Algorithm Simulated-Annealing(Initial State: s, Loss function: L(·))
+begin
+ CURRENT={s}; BEST= {s};
+ Set initial value of T = T0 in the same magnitude as the typical differences between adjacent losses;
+ t =1;
+ repeat
+	Set NEXT to randomly chosen adjacent state referred to as CURRENT;
+	ΔL=L(NEXT)−L(CURRENT);
+	Set CURRENT=NEXT with probability min{1,exp(−ΔL/T)};
+	if L(CURRENT) <L(BEST) set BEST=CURRENT;
+		t ⇐t+1;
+		T ⇐T0/log(t+1);
+ until no improvement in BEST for N iterations;
+ return BEST;
+end
+```
+
+---
+
+### Genetic Algorithms
+<br/>
+<div style="background: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+
+- Genetic algorithms borrow their paradigm from the process of biological evolution. 
+- Genetic algorithms work with a population of solutions (denoted by P), whose fitness is improved over time (as in biological evolution).
+- Each solution in the population is typically represented as a string of bits (0s and 1s), known as a chromosome.
+- For example, in the traveling salesperson problem, a representative string could be a sequence of indices of the cities, which defines the tour of the traveling salesperson. 
+- The “fitness” of the string may be defined by the cost of the tour corresponding to that sequence of cities.
+- Genetic algorithms use operations inspired by natural selection and genetics, such as selection, crossover (recombination), and mutation, to evolve the population of solutions over successive generations.
+</div>
+
+---
+
+### The genetic algorithm (continued)
+
+<div style="display: flex; gap: 1.5rem; margin-bottom: 1.5rem;">
+    <div style="background: #e3f2fd; border-radius: 8px; padding: 1rem; min-width: 220px; box-shadow: 0 2px 8px rgba(33,150,243,0.08);">
+        <strong>Selection</strong><br>
+        <span style="font-size:0.95em;">
+            The fittest individuals are selected from the current population to serve as parents for the next generation. <br/>
+        </span>
+    </div>
+    <div style="background: #fffde7; border-radius: 8px; padding: 1rem; min-width: 220px; box-shadow: 0 2px 8px rgba(255,235,59,0.08);">
+        <strong>Crossover</strong><br>
+        <span style="font-size:0.95em;">
+            pairs of solutions are selected, and their characteristics are recombined in order to create new solutions. This is typically done by exchanging segments of their chromosomes at one or more crossover points. 
+        </span>
+    </div>
+    <div style="background: #fce4ec; border-radius: 8px; padding: 1rem; min-width: 220px; box-shadow: 0 2px 8px rgba(233,30,99,0.08);">
+        <strong>Mutation</strong><br>
+        <span style="font-size:0.95em;">
+            Mutation introduces random changes to the chromosomes of individuals. Mutation can involve flipping bits, swapping elements, or making other alterations to the chromosome.
+        </span>
+    </div>
+</div>
+
+```python
+Algorithm GeneticAlgorithm(Initial Population: P, Loss function: L(·))
+ begin
+ t =1;
+ repeat
+	P =Select(P); { Select procedure uses loss function }
+	P =Crossover(P); { A subset of solutions may remain unchanged }
+	P =Mutate(P); { Uses mutation rate as a parameter }
+	t ⇐t+1;
+ until convergence condition is met;
+ return P;
+ end
+```
 
