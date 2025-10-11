@@ -28,14 +28,19 @@ export:
 
 
 <div class="pt-12">
-  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
-    Press Space for next page <carbon:arrow-right class="inline"/>
-  </span>
+  <a href="https://faculty.psau.edu.sa/en/psau/facultymember/7351" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10" target="_blank">
+    Dr. Khalil Chebil
+  </a>
+</div>
+<!-- add div for references -->
+<div class="abs-bl m-6 flex gap-2">
+  References: 
+  <a href="https://doi.org/10.1007/978-3-030-72357-6" class="underline" target="_blank">Artificial Intelligence by Charu C. Aggarwal</a>
+  <a href="https://inst.eecs.berkeley.edu/~cs188/" class="underline"
+    target="_blank">CS188: Introduction to Artificial Intelligence Berkeley University</a>
 </div>
 
-<div class="abs-br m-6 flex gap-2">
-  Dr. Khalil Chebil
-</div>
+
 
 ---
 
@@ -52,5 +57,9 @@ src: chap2.md
 ---
 ---
 src: chap3.md
+---
+
+---
+src: chap4.md
 ---
 
