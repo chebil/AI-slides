@@ -66,3 +66,7 @@ src: chap4.md
 ---
 src: chap5.md
 ---
+
+---
+src: chap6.md
+---
